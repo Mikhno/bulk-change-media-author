@@ -1,13 +1,16 @@
 <?php
 /*
 Plugin Name: Bulk Change Media Author
-Description: Allows you to bulk change the author of media items
-Plugin Author: Ruslan Mikhno
-Version: 0.2.0
+Plugin URI: http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author
+Description: This simple plugin allows you to change author for your media items in bulk.
+Version: 1.0
+Author: Ruslan Mikhno
 Author URI: http://www.mikhno.org
+Text Domain: bulk-change-media-author
 */
 
 defined('ABSPATH') or die('Direct access is not allowed.');
+
 
 /* Register the new bulk actions. */
 function bulk_change_media_author_register_actions($bulk_actions) {
@@ -17,7 +20,7 @@ function bulk_change_media_author_register_actions($bulk_actions) {
 add_filter('bulk_actions-upload', 'bulk_change_media_author_register_actions');
 
 
-/* Handle the actions. */
+/* Handle the new bulk actions. */
 function bulk_change_media_author_action_handler($redirect_to, $action_name, $media_ids) {
 	if ('bulk_change_media_author_action' === $action_name) {
 		$redirect_to = add_query_arg('media', urlencode(json_encode($media_ids)), 'options.php?page=bulk-change-media-author-edit-page' );
@@ -28,7 +31,7 @@ function bulk_change_media_author_action_handler($redirect_to, $action_name, $me
 add_filter('handle_bulk_actions-upload', 'bulk_change_media_author_action_handler', 10, 3);
 
 
-/* Register the edit page. */
+/* Register the author change page. */
 function bulk_change_media_author_register_edit_page() {
 	add_submenu_page(
 		'',
@@ -41,6 +44,7 @@ function bulk_change_media_author_register_edit_page() {
 }
 add_action('admin_menu', 'bulk_change_media_author_register_edit_page');
 
+
 /* Change author for the media. */
 function bulk_change_media_author_update_author($author_id, $media_ids) {
 	foreach ($media_ids as $media_id) {
@@ -51,7 +55,8 @@ function bulk_change_media_author_update_author($author_id, $media_ids) {
 	}
 }
 
-/* Display author change page. */
+
+/* Display the author change page. */
 function bulk_change_media_author_edit_page_callback() {
 	$author = (isset($_REQUEST['author'])) ? $_REQUEST['author'] : false;
 	$media = urldecode(stripslashes($_REQUEST['media']));
@@ -66,13 +71,16 @@ function bulk_change_media_author_edit_page_callback() {
 			$redirectToMediaLibrary = true;
 		} else if ($author) {
 			bulk_change_media_author_update_author($author, $media_ids);
+
 			echo '<hr /><div class="result">';
 			_e('Updated! New author: ', 'bulk-change-media-author');
 			 echo get_the_author_meta('display_name', $author) . '. ';
 			_e('Redirecting back to Media Library...', 'bulk-change-media-author');
 			echo '</div>';
+
 			$redirectToMediaLibrary = true;
 		}
+
 		if ($redirectToMediaLibrary) {
 			echo '<script type="text/javascript">';
 			echo 'setTimeout(function(){ window.location = "' . admin_url('upload.php') . '" }, 1000);';
@@ -103,6 +111,7 @@ function bulk_change_media_author_edit_page_callback() {
 			$media_file = basename(get_attached_file($media_id));
 			$media_file = (strlen($media_file) > 10) ? substr($media_file, 0, 7) . '...' : $media_file;
 			$media_title = $media_name . ' (' . $media_file . ')';
+
 			echo '<div class="media">';
 			echo '<a href="'. get_edit_post_link($media_id) . '" target="_blank">';
 			echo '<div class="media-author">' . get_the_author_meta('display_name', get_post_field ('post_author', $media_id)) . '</div>';
