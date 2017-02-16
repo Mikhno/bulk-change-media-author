@@ -3,7 +3,7 @@
 Plugin Name: Bulk Change Media Author
 Description: Allows you to bulk change the author of media items
 Plugin Author: Ruslan Mikhno
-Version: 0.1.0
+Version: 0.2.0
 Author URI: http://www.mikhno.org
 */
 
@@ -62,11 +62,15 @@ function bulk_change_media_author_edit_page_callback() {
 		<h1><?php _e('Bulk change author for media', 'bulk-change-media-author'); ?></h1>
 		<?php
 		if (count($media_ids) == 0) {
-			echo '<hr /><div class="result">No media items selected. Redirecting back to Media Library...</div>';
+			echo '<hr /><div class="result">' . __( 'No media items selected. Redirecting back to Media Library...', 'bulk-change-media-author') . '</div>';
 			$redirectToMediaLibrary = true;
 		} else if ($author) {
 			bulk_change_media_author_update_author($author, $media_ids);
-			echo '<hr /><div class="result">Updated! New author: ' . get_the_author_meta('display_name', $author) . '. Redirecting back to Media Library...</div>';
+			echo '<hr /><div class="result">';
+			_e('Updated! New author: ', 'bulk-change-media-author');
+			 echo get_the_author_meta('display_name', $author) . '. ';
+			_e('Redirecting back to Media Library...', 'bulk-change-media-author');
+			echo '</div>';
 			$redirectToMediaLibrary = true;
 		}
 		if ($redirectToMediaLibrary) {
@@ -91,7 +95,7 @@ function bulk_change_media_author_edit_page_callback() {
 			</div>
 		</form>
 		<hr />
-		<p>Selected media items (the author will be changed for the items below):</p>
+		<p><?php _e('Selected media items (the author will be changed for the items below)', 'bulk-change-media-author'); ?>:</p>
 		<div><?php
 		foreach ($media_ids as $media_id):
 			$media_name = get_the_title($media_id);
