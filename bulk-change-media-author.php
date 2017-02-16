@@ -64,7 +64,10 @@ function bulk_change_media_author_edit_page_callback() {
 		if ($author) {
 			bulk_change_media_author_update_author($author, $media_ids);
 			echo '<hr />';
-			echo '<div class="result success">Updated! New author: ' . get_the_author_meta('display_name', $author) . '.</div>';
+			echo '<div class="result success">Updated! New author: ' . get_the_author_meta('display_name', $author) . '. Redirecting back to Media Library...</div>';
+			echo '<script type="text/javascript">';
+			echo 'window.location = "' . admin_url('upload.php') . '"';
+			echo '</script>';
 		}
 		?>
 		<hr />
@@ -88,7 +91,7 @@ function bulk_change_media_author_edit_page_callback() {
 		foreach ($media_ids as $media_id):
 			echo '<div class="media">';
 			echo '<a href="'. get_edit_post_link($media_id) . '" target="_blank">';
-			echo '<div>' . get_the_title($media_id) . ' (' . basename(get_attached_file($media_id)) . ')' . '</div>';
+			echo '<div class="media-title">' . get_the_title($media_id) . ' (' . basename(get_attached_file($media_id)) . ')' . '</div>';
 			echo '<div class="media-thumb">' . wp_get_attachment_image($media_id) . '</div>';
 			echo '</a>';
 			echo '</div>';
@@ -104,6 +107,12 @@ function bulk_change_media_author_edit_page_callback() {
 				padding: 10px;
 				margin: 5px;
 				background: #fff;
+			}
+			.media a {
+				text-decoration: none;
+			}
+			.media-title {
+				color: #000;
 			}
 			.media-thumb {
 				margin-top: 5px;
