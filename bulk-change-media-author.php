@@ -50,36 +50,66 @@ function bulk_change_media_author_update_author($author_id, $media_ids) {
 		));
 	}
 }
- 
+
 /* Display author change page. */
 function bulk_change_media_author_edit_page_callback() {
 	$author = (isset($_REQUEST['author'])) ? $_REQUEST['author'] : false;
 	$media = urldecode(stripslashes($_REQUEST['media']));
 	$media_ids = json_decode($media);
-	
-	if ($author) {
-		bulk_change_media_author_update_author($author, $media_ids);
-		echo "<div>Updated!</div>";
-	}
+
 	?>
 	<div class="wrap">
-		<h1><?php _e('Changing author for media in bulk', 'bulk-change-media-author'); ?></h1>
-		<p><?php _e('Select a new author for the media', 'bulk-change-media-author'); ?></p>
+		<h1><?php _e('Bulk change author for media', 'bulk-change-media-author'); ?></h1>
+		<?php
+		if ($author) {
+			bulk_change_media_author_update_author($author, $media_ids);
+			echo '<hr />';
+			echo '<div class="result success">Updated! New author: ' . get_the_author_meta('display_name', $author) . '.</div>';
+		}
+		?>
+		<hr />
 		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+			<p><?php _e('Select a new author for the media:', 'bulk-change-media-author'); ?></p>
 			<input type="hidden" name="page" value="bulk-change-media-author-edit-page" />
 			<input type="hidden" name="media" value="<?php echo urlencode($media); ?>" />
 			<div>
 				<select name="author"><?php
-	$users = get_users();
-	foreach ( $users as $user ) {
-		echo '<option value="' . esc_html($user->ID) . '">' . esc_html($user->user_login) . '</option>';
-	}
+				$users = get_users();
+				foreach ($users as $user):
+					echo '<option value="' . esc_html($user->ID) . '">' . esc_html($user->user_login) . '</option>';
+				endforeach;
 				?></select>
-				<input type="submit" value="Change">
+				<input type="submit" class="button" value="Change">
 			</div>
 		</form>
-		<p>Selected media items:</p>
-		<div><?php var_export($media_ids); ?></div>
+		<hr />
+		<p>Selected media items (the author will be changed for the items below):</p>
+		<div><?php
+		foreach ($media_ids as $media_id):
+			echo '<div class="media">';
+			echo '<a href="'. get_edit_post_link($media_id) . '" target="_blank">';
+			echo '<div>' . get_the_title($media_id) . ' (' . basename(get_attached_file($media_id)) . ')' . '</div>';
+			echo '<div class="media-thumb">' . wp_get_attachment_image($media_id) . '</div>';
+			echo '</a>';
+			echo '</div>';
+		endforeach;
+		?></div>
+		<hr />
+		<style>
+			.result.success {
+				font-weight: bold;
+			}
+			.media {
+				display: inline-block;
+				padding: 10px;
+				margin: 5px;
+				background: #fff;
+			}
+			.media-thumb {
+				margin-top: 5px;
+				border: 1px solid rgba(0,0,0,.07);
+			}
+		</style>
 	</div>
 	<?php
 }
