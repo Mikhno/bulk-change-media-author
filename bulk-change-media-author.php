@@ -56,17 +56,22 @@ function bulk_change_media_author_edit_page_callback() {
 	$author = (isset($_REQUEST['author'])) ? $_REQUEST['author'] : false;
 	$media = urldecode(stripslashes($_REQUEST['media']));
 	$media_ids = json_decode($media);
-
+	$redirectToMediaLibrary = false;
 	?>
 	<div class="wrap">
 		<h1><?php _e('Bulk change author for media', 'bulk-change-media-author'); ?></h1>
 		<?php
-		if ($author) {
+		if (count($media_ids) == 0) {
+			echo '<hr /><div class="result">No media items selected. Redirecting back to Media Library...</div>';
+			$redirectToMediaLibrary = true;
+		} else if ($author) {
 			bulk_change_media_author_update_author($author, $media_ids);
-			echo '<hr />';
-			echo '<div class="result success">Updated! New author: ' . get_the_author_meta('display_name', $author) . '. Redirecting back to Media Library...</div>';
+			echo '<hr /><div class="result">Updated! New author: ' . get_the_author_meta('display_name', $author) . '. Redirecting back to Media Library...</div>';
+			$redirectToMediaLibrary = true;
+		}
+		if ($redirectToMediaLibrary) {
 			echo '<script type="text/javascript">';
-			echo 'window.location = "' . admin_url('upload.php') . '"';
+			echo 'setTimeout(function(){ window.location = "' . admin_url('upload.php') . '" }, 1000);';
 			echo '</script>';
 		}
 		?>
@@ -82,16 +87,22 @@ function bulk_change_media_author_edit_page_callback() {
 					echo '<option value="' . esc_html($user->ID) . '">' . esc_html($user->user_login) . '</option>';
 				endforeach;
 				?></select>
-				<input type="submit" class="button" value="Change">
+				<input type="submit" class="button-primary" value="Change"> <a href="<?php echo admin_url('upload.php'); ?>" class="button-secondary" >Cancel</a>
 			</div>
 		</form>
 		<hr />
 		<p>Selected media items (the author will be changed for the items below):</p>
 		<div><?php
 		foreach ($media_ids as $media_id):
+			$media_name = get_the_title($media_id);
+			$media_name = (strlen($media_name) > 13) ? substr($media_name, 0, 10) . '...' : $media_name;
+			$media_file = basename(get_attached_file($media_id));
+			$media_file = (strlen($media_file) > 10) ? substr($media_file, 0, 7) . '...' : $media_file;
+			$media_title = $media_name . ' (' . $media_file . ')';
 			echo '<div class="media">';
 			echo '<a href="'. get_edit_post_link($media_id) . '" target="_blank">';
-			echo '<div class="media-title">' . get_the_title($media_id) . ' (' . basename(get_attached_file($media_id)) . ')' . '</div>';
+			echo '<div class="media-author">' . get_the_author_meta('display_name', get_post_field ('post_author', $media_id)) . '</div>';
+			echo '<div>' . $media_title . '</div>';
 			echo '<div class="media-thumb">' . wp_get_attachment_image($media_id) . '</div>';
 			echo '</a>';
 			echo '</div>';
@@ -99,24 +110,27 @@ function bulk_change_media_author_edit_page_callback() {
 		?></div>
 		<hr />
 		<style>
-			.result.success {
+			.result {
 				font-weight: bold;
 			}
 			.media {
 				display: inline-block;
 				padding: 10px;
-				margin: 5px;
+				margin: 10px;
 				background: #fff;
 			}
 			.media a {
 				text-decoration: none;
-			}
-			.media-title {
 				color: #000;
+			}
+			.media-author {
+				font-weight: bold;
 			}
 			.media-thumb {
 				margin-top: 5px;
 				border: 1px solid rgba(0,0,0,.07);
+				max-width: 150px;
+		    max-height: 150px;
 			}
 		</style>
 	</div>
