@@ -14,7 +14,7 @@ defined('ABSPATH') or die('Direct access is not allowed.');
 
 /* Register the new bulk actions. */
 function bulk_change_media_author_register_actions($bulk_actions) {
-	$bulk_actions['bulk_change_media_author_action'] = __( 'Change author', 'bulk-change-media-author');
+	$bulk_actions['bulk_change_media_author_action'] = __( 'Change Author', 'bulk-change-media-author');
 	return $bulk_actions;
 }
 add_filter('bulk_actions-upload', 'bulk_change_media_author_register_actions');
