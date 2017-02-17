@@ -9,11 +9,11 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Change author for multiple media files in bulk, using the default WP Media Library.
+Bulk change author for multiple media files, using the default WP Media Library.
 
 == Description ==
 
-This is a very simple plugin that allows you to change author for multiple media files at one time.
+This is a very simple plugin that allows you to bulk change author for media files.
 
 The action is added in the "List" view of the Media Library.
 
