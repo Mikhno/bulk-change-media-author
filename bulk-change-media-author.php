@@ -3,7 +3,7 @@
 Plugin Name: Bulk Change Media Author
 Plugin URI: http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author
 Description: This simple plugin allows you to bulk change author for your media items.
-Version: 1.0
+Version: 1.1
 Author: Ruslan Mikhno
 Author URI: http://www.mikhno.org
 Text Domain: bulk-change-media-author
@@ -99,7 +99,7 @@ function bulk_change_media_author_edit_page_callback() {
 					echo '<option value="' . esc_html($user->ID) . '">' . esc_html($user->user_login) . '</option>';
 				endforeach;
 				?></select>
-				<input type="submit" class="button-primary" value="Change"> <a href="<?php echo admin_url('upload.php'); ?>" class="button-secondary" >Cancel</a>
+				<input type="submit" class="button-primary" value="<?php _e('Change', 'bulk-change-media-author'); ?>"> <a href="<?php echo admin_url('upload.php'); ?>" class="button-secondary" ><?php _e('Cancel', 'bulk-change-media-author'); ?></a>
 			</div>
 		</form>
 		<hr />
@@ -149,3 +149,10 @@ function bulk_change_media_author_edit_page_callback() {
 	</div>
 	<?php
 }
+
+
+/* Load translation (textmodain) files. */
+function bulk_change_media_author_load_textdomain() {
+	load_plugin_textdomain('bulk-change-media-author', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
+add_action('plugins_loaded', 'bulk_change_media_author_load_textdomain');
