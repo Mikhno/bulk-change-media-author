@@ -3,7 +3,7 @@
 Plugin Name: Bulk Change Media Author
 Plugin URI: http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author
 Description: This simple plugin allows you to bulk change author for your media items.
-Version: 1.1
+Version: 1.2
 Author: Ruslan Mikhno
 Author URI: http://www.mikhno.org
 Text Domain: bulk-change-media-author

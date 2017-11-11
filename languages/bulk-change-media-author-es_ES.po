@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bulk Change Media Author 1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bulk-change-media-"
+"author\n"
+"POT-Creation-Date: 2017-06-27 20:13:18+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-11-03 17:10+0000\n"
+"Last-Translator: Carlos <cml@cs.uns.edu.ar>\n"
+"Language-Team: Spanish (Spain)\n"
+"Language: es-ES\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: bulk-change-media-author.php:17
+msgid "Change Author"
+msgstr "Cambiar Autor"
+
+#: bulk-change-media-author.php:38
+msgid "Bulk Change Media Author"
+msgstr "Cambiar en lotes el autor de medios"
+
+#: bulk-change-media-author.php:67
+msgid "Bulk change author for media"
+msgstr "Cambiar por lotes el autor de los medios"
+
+#: bulk-change-media-author.php:70
+msgid "No media items selected. Redirecting back to Media Library..."
+msgstr "No se seleccionaron elementos. Volviendo a la biblioteca de medios ..."
+
+#: bulk-change-media-author.php:76
+msgid "Updated! New author: "
+msgstr "Actualizado! Autor nuevo:"
+
+#: bulk-change-media-author.php:78
+msgid "Redirecting back to Media Library..."
+msgstr "Volviendo a la Biblioteca de Medios ..."
+
+#: bulk-change-media-author.php:92
+msgid "Select a new author for the media:"
+msgstr "Elija un autor nuevo para el medio:"
+
+#: bulk-change-media-author.php:102
+msgid "Change"
+msgstr "Cambiar"
+
+#: bulk-change-media-author.php:102
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: bulk-change-media-author.php:106
+msgid "Selected media items (the author will be changed for the items below)"
+msgstr ""
+"Elementos seleccionados (se cambiará el autor de los elementos que se "
+"muestran debajo)"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author"
+msgstr "http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author"
+
+#. Description of the plugin/theme
+msgid ""
+"This simple plugin allows you to bulk change author for your media items."
+msgstr ""
+"Este plugin simple permite cambiar por lotes el autor de sus archivos de "
+"medios."
+
+#. Author of the plugin/theme
+msgid "Ruslan Mikhno"
+msgstr "Ruslan Mikhno"
+
+#. Author URI of the plugin/theme
+msgid "http://www.mikhno.org"
+msgstr "http://www.mikhno.org"

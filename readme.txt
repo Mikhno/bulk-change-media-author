@@ -4,7 +4,7 @@ Author URI: http://www.mikhno.org/
 Plugin URL: http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author
 Tags: upload, bulk, attachment, author, media, change
 Requires at least: 4.7
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,6 +38,10 @@ Open "Screen Options" at the top-right in the Media Library and change the value
 1. The new bulk action is added into Bulk Actions dropdown menu for "List" view of the Media Library.
 
 == Changelog ==
+
+= 1.2 =
+* Other: Tested with WordPress 4.9.
+* Translations: Added Spanish (thanks Kcho).
 
 = 1.1 =
 * New: Added translation support.
