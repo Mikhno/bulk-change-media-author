@@ -4,7 +4,7 @@ Author URI: http://www.mikhno.org/
 Plugin URL: http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author
 Tags: upload, bulk, attachment, author, media, change
 Requires at least: 4.7
-Tested up to: 4.9
+Tested up to: 6.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,11 +33,19 @@ Not yet.
 
 Open "Screen Options" at the top-right in the Media Library and change the value of "Number of items per page" in the "Pagination" section.
 
+= Can I quickly change the author for all media uploaded by particular user? =
+
+If you apply "Change Author" in the Media Library without selecting any media, it will prompt you to filter media by user. After that, you will be able to change the author for all media uploaded by that user.
+
 == Screenshots ==
 
 1. The new bulk action is added into Bulk Actions dropdown menu for "List" view of the Media Library.
 
 == Changelog ==
+
+= 1.3 =
+* New: Filter and bulk change media author by its current author.
+* Other: Tested with WordPress 6.3.
 
 = 1.2 =
 * Other: Tested with WordPress 4.9.
