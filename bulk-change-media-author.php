@@ -3,7 +3,7 @@
 Plugin Name: Bulk Change Media Author
 Plugin URI: http://www.mikhno.org/articles/en/files/wp_bulk_change_media_author
 Description: This simple plugin allows you to bulk change author for your media items.
-Version: 1.3
+Version: 1.3.1
 Author: Ruslan Mikhno
 Author URI: http://www.mikhno.org
 Text Domain: bulk-change-media-author
@@ -60,10 +60,14 @@ function bulk_change_media_author_update_author($author_id, $media_ids) {
 function bulk_change_media_author_edit_page_callback() {
 	$author = (isset($_REQUEST['author'])) ? $_REQUEST['author'] : false;
 	$for = (isset($_REQUEST['for'])) ? $_REQUEST['for'] : false;
-	$media = urldecode(stripslashes($_REQUEST['media']));
-	$media_ids = json_decode($media);
+	$media = false;
+	$media_ids = array();
+	if (isset($_REQUEST['media'])) {
+		$media = urldecode(stripslashes($_REQUEST['media']));
+		$media_ids = json_decode($media);
+	}
 	$redirectToMediaLibrary = false;
-	if ($for && (count($media_ids) == 0)) {
+	if ($for && empty($media_ids)) {
 		$query = new WP_Query(array(
 		    'author' => $for,
 		    'post_type' => 'attachment',
@@ -77,7 +81,7 @@ function bulk_change_media_author_edit_page_callback() {
 	<div class="wrap">
 		<h1><?php _e('Bulk change author for media', 'bulk-change-media-author'); ?></h1>
 		<?php
-		if (count($media_ids) == 0) {
+		if (empty($media_ids)) {
 			?>
 			<hr />
 			<div>
