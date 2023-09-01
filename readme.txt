@@ -43,6 +43,9 @@ If you apply "Change Author" in the Media Library without selecting any media, i
 
 == Changelog ==
 
+= 1.3.2 =
+* Fix: Pagination limit when filtering media by author.
+
 = 1.3.1 =
 * Fix: PHP type error when filtering media by author.
 
