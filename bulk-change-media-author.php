@@ -36,7 +36,7 @@ function bulk_change_media_author_register_edit_page() {
 	add_submenu_page(
 		'',
 		__( 'Bulk Change Media Author', 'bulk-change-media-author' ),
-		__( '', 'bulk-change-media-author' ),
+		__( 'Bulk Change Media Author', 'bulk-change-media-author' ),
 		'manage_options',
 		'bulk-change-media-author-edit-page',
 		'bulk_change_media_author_edit_page_callback'
